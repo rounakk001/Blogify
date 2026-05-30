@@ -5,7 +5,7 @@ import {Button,Input,Logo} from '../components'
 import { Link,useNavigate,useNavigation } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import AuthService from '../appwrite/auth'
-import { login } from '../store/authslice'
+import { login } from '../store/authSlice'
 
 
 function Signup() {
