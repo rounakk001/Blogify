@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react'
 import {Provider, useDispatch} from 'react-redux'
 import React from 'react'
 import AuthService from "./appwrite/auth"
-import { login,logout } from './store/authslice'
+import { login,logout } from './store/authSlice'
 import store from './store/store'
 import Footer from "./components/Footer/Footer";
 
