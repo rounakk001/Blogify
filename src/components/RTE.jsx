@@ -20,6 +20,9 @@ export default function RTE({name, control, label, defaultValue =""}) {
             initialValue: defaultValue,
             height: 500,
             menubar: true,
+             mobile: {
+          menubar: false
+           },
             plugins: [
                 "image",
                 "advlist",
