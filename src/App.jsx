@@ -39,9 +39,9 @@ function App() {
   
   //agar loading false hai to  kya return kreynege warna kya krayenge 
   return !Loading ? (
-    <div className='min-h-screen flex flex-col bg-gray-200'>
+    <div className='min-h-screen flex flex-col bg-theme-bg text-theme-text font-sans selection:bg-theme-accent selection:text-white'>
       <Header/>
-      <main className='flex-grow'>
+      <main className='flex-grow w-full'>
         <Outlet/>
       </main>
       <Footer/>

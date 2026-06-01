@@ -11,9 +11,26 @@ export default {
     "bg-blue-600",
     "text-white",
   ],
-  darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+      },
+      colors: {
+        theme: {
+          bg: '#FAFAF8',
+          card: '#FFFFFF',
+          text: '#111111',
+          secondary: '#666666',
+          border: '#E5E7EB',
+          accent: '#2563EB', // subtle blue
+          accentHover: '#1D4ED8'
+        }
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }
