@@ -55,47 +55,70 @@ function Header() {
 
           {/* Navigation Links */}
           {authStatus &&
-          <ul className='flex flex-wrap items-center gap-3'>
-            {navItems.filter(item => !item.isAction).map((item) =>
-              item.active ? (
-                <li key={item.name}>
-                  <NavLink
-                    to={item.slug}
-                    className={({ isActive }) =>
-                      `text-md font-medium transition-colors ${isActive
-                        ? "text-blue-500"
-                        : "text-theme-secondary hover:text-theme-text"
-                      }`
-                    }
-                  >
-                    {item.name}
-                  </NavLink>
-                </li>
-              ) : null
-            )}
-          </ul>
-}
+            <ul className='flex flex-wrap items-center gap-3'>
+              {navItems.filter(item => !item.isAction).map((item) =>
+                item.active ? (
+                  <li key={item.name}>
+                    <NavLink
+                      to={item.slug}
+                      className={({ isActive }) =>
+                        `text-md font-medium transition-colors ${isActive
+                          ? "text-blue-500"
+                          : "text-theme-secondary hover:text-theme-text"
+                        }`
+                      }
+                    >
+                      {item.name}
+                    </NavLink>
+                  </li>
+                ) : null
+              )}
+            </ul>
+          }
 
           <div className="flex items-center gap-4">
-            {authStatus && (
-              <input
-                type="text"
-                placeholder="Search articles..."
-                value={searchTerm}
-                onChange={(e) => {
-                  const value = e.target.value;
 
-                  if (value.trim()) {
-                    setSearchParams({ search: value });
-                  } else {
-                    setSearchParams({});
-                  }
-                }}
-                className="w-32 md:w-64 px-3 md:px-4 py-2 border border-theme-border rounded-full text-sm focus:outline-none"
-              />
+            {authStatus && (
+              <>
+                {/* Mobile Search Icon */}
+                <button className="md:hidden text-theme-secondary hover:text-theme-text transition-colors">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </button>
+
+                {/* Desktop Search */}
+                <input
+                  type="text"
+                  placeholder="Search articles..."
+                  value={searchTerm}
+                  onChange={(e) => {
+                    const value = e.target.value;
+
+                    if (value.trim()) {
+                      setSearchParams({ search: value });
+                    } else {
+                      setSearchParams({});
+                    }
+                  }}
+                  className="hidden md:block w-64 px-4 py-2 border border-theme-border rounded-full text-sm focus:outline-none"
+                />
+              </>
             )}
 
             <div className="h-4 w-px bg-theme-border mx-1"></div>
+
             {navItems.filter(item => item.isAction).map((item) =>
               item.active ? (
                 <NavLink
@@ -112,10 +135,7 @@ function Header() {
               ) : null
             )}
 
-            {/* Logout Button */}
-            {authStatus && (
-              <LogoutBtn />
-            )}
+            {authStatus && <LogoutBtn />}
           </div>
         </nav>
       </Container>
