@@ -45,7 +45,7 @@ function Header() {
   ]
 
   return (
-    <header className='sticky top-0 z-50 w-full bg-theme-bg/95 backdrop-blur-sm border-b border-theme-border'>
+    <header className='sticky top-0 z-50 w-full bg-theme-bg/95 backdrop-blur-sm border-b border-theme-border relative'>
       <Container>
         <nav className='flex items-center justify-between py-4'>
           {/* Logo */}
@@ -174,8 +174,10 @@ function Header() {
 
           </div>
         </nav>
+
         {authStatus && menuOpen && (
-          <div className="md:hidden border-t border-theme-border py-4">
+          <div className="absolute right-4 top-20 w-64 bg-white rounded-xl border border-theme-border shadow-xl p-4 md:hidden">
+
             <div className="flex flex-col gap-4">
 
               {navItems
@@ -185,31 +187,35 @@ function Header() {
                     key={item.name}
                     to={item.slug}
                     onClick={() => setmenuOpen(false)}
-                    className="text-theme-text font-medium"
+                    className="text-theme-text font-medium hover:text-blue-500 transition-colors"
                   >
                     {item.name}
                   </NavLink>
                 ))}
 
-              <input
-                type="text"
-                placeholder="Search articles..."
-                value={searchTerm}
-                onChange={(e) => {
-                  const value = e.target.value;
+              <div className="border-t border-theme-border pt-4">
+                <input
+                  type="text"
+                  placeholder="Search articles..."
+                  value={searchTerm}
+                  onChange={(e) => {
+                    const value = e.target.value;
 
-                  if (value.trim()) {
-                    setSearchParams({ search: value });
-                  } else {
-                    setSearchParams({});
-                  }
-                }}
-                className="w-full px-4 py-2 border border-theme-border rounded-full"
-              />
+                    if (value.trim()) {
+                      setSearchParams({ search: value });
+                    } else {
+                      setSearchParams({});
+                    }
+                  }}
+                  className="w-full px-3 py-2 border border-theme-border rounded-lg text-sm focus:outline-none"
+                />
+              </div>
+
             </div>
           </div>
         )}
-        
+
+
       </Container>
     </header>
   )
