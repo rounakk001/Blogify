@@ -91,7 +91,7 @@ function Header() {
                     setSearchParams({});
                   }
                 }}
-                className="px-4 py-2 border border-theme-border rounded-full text-sm focus:outline-none"
+                className="w-32 md:w-64 px-3 md:px-4 py-2 border border-theme-border rounded-full text-sm focus:outline-none"
               />
             )}
 
