@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Logo, LogoutBtn } from '../index'
 import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -7,6 +7,9 @@ import { useSearchParams } from "react-router-dom";
 function Header() {
 
   const authStatus = useSelector((state) => state.auth.status)
+
+  const [menuOpen, setmenuOpen] = useState(false);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const searchTerm = searchParams.get("search") || "";
@@ -55,7 +58,7 @@ function Header() {
 
           {/* Navigation Links */}
           {authStatus &&
-            <ul className='flex flex-wrap items-center gap-3'>
+            <ul className='hidden md:flex items-center gap-6'>
               {navItems.filter(item => !item.isAction).map((item) =>
                 item.active ? (
                   <li key={item.name}>
@@ -136,8 +139,77 @@ function Header() {
             )}
 
             {authStatus && <LogoutBtn />}
+
+            {authStatus && (
+              <button
+                onClick={() => setmenuOpen(!menuOpen)}
+                className="md:hidden text-theme-text"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {menuOpen ? (
+                    <>
+                      <line x1="18" y1="6" x2="6" y2="18"></line>
+                      <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </>
+                  ) : (
+                    <>
+                      <line x1="3" y1="12" x2="21" y2="12"></line>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </>
+                  )}
+                </svg>
+              </button>
+            )}
+
           </div>
         </nav>
+        {authStatus && menuOpen && (
+          <div className="md:hidden border-t border-theme-border py-4">
+            <div className="flex flex-col gap-4">
+
+              {navItems
+                .filter(item => !item.isAction)
+                .map((item) => (
+                  <NavLink
+                    key={item.name}
+                    to={item.slug}
+                    onClick={() => setmenuOpen(false)}
+                    className="text-theme-text font-medium"
+                  >
+                    {item.name}
+                  </NavLink>
+                ))}
+
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchTerm}
+                onChange={(e) => {
+                  const value = e.target.value;
+
+                  if (value.trim()) {
+                    setSearchParams({ search: value });
+                  } else {
+                    setSearchParams({});
+                  }
+                }}
+                className="w-full px-4 py-2 border border-theme-border rounded-full"
+              />
+            </div>
+          </div>
+        )}
+        
       </Container>
     </header>
   )
