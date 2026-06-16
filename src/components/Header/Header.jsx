@@ -54,6 +54,7 @@ function Header() {
           </div>
 
           {/* Navigation Links */}
+          {authStatus &&
           <ul className='flex items-center gap-4 overflow-x-auto'>
             {navItems.filter(item => !item.isAction).map((item) =>
               item.active ? (
@@ -73,6 +74,7 @@ function Header() {
               ) : null
             )}
           </ul>
+}
 
           <div className="flex items-center gap-4">
             {authStatus && (
