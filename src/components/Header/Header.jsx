@@ -54,7 +54,7 @@ function Header() {
           </div>
 
           {/* Navigation Links */}
-          <ul className='hidden md:flex items-center gap-6'>
+          <ul className='flex items-center gap-4 overflow-x-auto'>
             {navItems.filter(item => !item.isAction).map((item) =>
               item.active ? (
                 <li key={item.name}>
