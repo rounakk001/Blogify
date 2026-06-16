@@ -55,7 +55,7 @@ function Header() {
 
           {/* Navigation Links */}
           {authStatus &&
-          <ul className='flex items-center gap-4 overflow-x-auto'>
+          <ul className='flex flex-wrap items-center gap-3'>
             {navItems.filter(item => !item.isAction).map((item) =>
               item.active ? (
                 <li key={item.name}>
